@@ -1,7 +1,6 @@
 // Estado de la app
 let fotos = ["casa1", "casa2", "casa3", "casa4", "casa5", "casa6", "casa7", "casa8"];
 let galeria = [];
-
 for (let i = 0; i < fotos.length; i++) {
     // 1. Recuperamos el nombre de la foto
     let siguienteFoto = fotos[i];
@@ -15,6 +14,13 @@ for (let i = 0; i < fotos.length; i++) {
         // 2. llamar a la función llenarGaleria()
 
         let fotoClicada = event.target.src;
+
+        if (galeria.includes(fotoClicada)) {
+            // si la galería ya tiene la foto que acabao de doble clickear
+            alert(`La foto ${fotoClicada} ya está en la galería.`);
+            return;
+        }
+
         galeria.push(fotoClicada);
         llenarGaleria();
 
@@ -36,14 +42,37 @@ function llenarGaleria() {
     for (let i = 0; i < galeria.length; i++) {
         // 2. Crear una 'img' para cada posición del array y usar el valor galeria[i] para establecer el valor de la propiedad .src
 
+        // Necesitamos un contenedor para albergar las dos imagenes
+        let contenedorImagen = document.createElement("div");
+        contenedorImagen.classList.add("imagen-galeria");
+
         let imagen = document.createElement("img");
         imagen.src = galeria[i];
 
-        // 3. añadir la imagen como hijo de id="galeria"
-        sectionGaleria.appendChild(imagen);
+        let aspaQuitarFoto = document.createElement("img");
+        aspaQuitarFoto.src = "/img/borrar.png";
+        aspaQuitarFoto.classList.add("aspa-eliminar");
+        aspaQuitarFoto.id = imagen.src;
+
+        aspaQuitarFoto.addEventListener("click", function (event) {
+            // Acceso a la imagen asociada al aspa que acabamos de clicar
+            console.log("Foto clicada");
+            console.log(event.target.id);
+        })
+
+        // en el DIV , pon la imagen
+        contenedorImagen.appendChild(imagen);
+        // en el DIV, pon el aspa 
+        contenedorImagen.appendChild(aspaQuitarFoto);
+
+        // en la section, añade el DIV
+        sectionGaleria.appendChild(contenedorImagen);
 
     }
 
 
 
 }
+
+
+ 
