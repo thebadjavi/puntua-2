@@ -1,9 +1,7 @@
-// Estado de la app
 let fotos = ["casa1", "casa2", "casa3", "casa4", "casa5", "casa6", "casa7", "casa8"];
 let galeria = [];
 
 for (let i = 0; i < fotos.length; i++) {
-    // 1. Recuperamos el nombre de la foto
     let siguienteFoto = fotos[i];
 
     let imagen = document.createElement("img");
